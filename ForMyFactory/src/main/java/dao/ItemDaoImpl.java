@@ -84,7 +84,7 @@ public class ItemDaoImpl implements ItemDao {
 		this.template.update("DELETE FROM linux where page_no = ?", itemId);
 	}
 	
-	private static final String UPDATE = "UPDATE linux SET title = ?, page_no = ?, contents = ?, author = ?,picture = ? WHERE page_no = ?";
+	private static final String UPDATE = "UPDATE linux SET title = ?, contents = ?, author = ? WHERE page_no = ?";
 
 	public void udpate(final Item item) {
 		this.jdbcTemplate.execute(UPDATE, new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
@@ -93,14 +93,13 @@ public class ItemDaoImpl implements ItemDao {
 					DataAccessException {
 				int index = 0;
 				ps.setString(++index, item.getTitle());
-				ps.setInt(++index, item.getPageNo().intValue());
 				ps.setString(++index, item.getContents());
 				ps.setString(++index, item.getAuthor());
-				try {
+				/*try {
 					lobCreator.setBlobAsBytes(ps, ++index, item.getPicture().getBytes());
 				} catch (IOException e) {
 					throw new RuntimeException(e);
-				}
+				}*/
 				ps.setInt(++index, item.getPageNo().intValue());
 			}
 		});
