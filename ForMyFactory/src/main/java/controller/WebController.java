@@ -130,7 +130,7 @@ public class WebController {
 	
 	@RequestMapping("/image.html")
 	public void image(Integer itemId, HttpServletResponse response) {
-		response.setContentType("image/jpeg");
+		response.setContentType("image/jpg");
 		InputStream picture = null;
 		OutputStream os = null;
 		BufferedInputStream bis = null;

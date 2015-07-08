@@ -62,7 +62,7 @@
 			
             <!-- Blog Post Content Column -->
             <div class="col-md-6 col-md-offset-3">
-            	<form:form modelAttribute="item" action="update.html">
+            	<form:form modelAttribute="item" action="update.html" enctype="multipart/form-data">
             		<form:hidden path="pageNo" />
             	 <h2>
             	 <div class="form-group">
@@ -82,7 +82,7 @@
                 <hr>
 
                 <!-- Preview Image -->
-                <input type="file" title="Search for a file to add">
+                <input type="file" name="picture" value="image.html?itemId=${item.pageNo}" title="Search for a file to add">
 
                 <hr>
 

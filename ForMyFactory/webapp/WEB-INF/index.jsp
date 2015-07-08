@@ -137,9 +137,9 @@
                                 <i class="fa fa-shield fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
-                                    <strong>Book</strong>
+                                    <strong>To do</strong>
                                 </h4>
-                                <p>I read the book</p>
+                                <p>This is to do list</p>
                                 <a href="sorry.html" class="btn btn-light">Learn More</a>
                             </div>
                         </div>

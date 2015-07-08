@@ -2,6 +2,7 @@ package dao;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,14 +39,15 @@ public class ItemDaoImpl implements ItemDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	private static final String SELECT_ALL = "SELECT page_no, title, author,contents, today FROM linux";
+	private static final String SELECT_ALL = 
+			"SELECT page_no, title, author,contents, today FROM linux";
 
 	public List<Item> findAll() {
 		RowMapper<Item> mapper = new BeanPropertyRowMapper<Item>(Item.class);
 		return this.template.query(ItemDaoImpl.SELECT_ALL, mapper);
 	}
 
-	private static final String SELECT_BY_PRIMARY_KEY = "SELECT page_no, title, author,contents,picture,today FROM linux WHERE page_no = ?";
+	private static final String SELECT_BY_PRIMARY_KEY = "SELECT page_no, title, author,contents, today FROM linux WHERE page_no = ?";
 
 	public Item findByPrimaryKey(Integer itemId) {
 		RowMapper<Item> mapper = new BeanPropertyRowMapper<Item>(Item.class);
@@ -84,7 +86,7 @@ public class ItemDaoImpl implements ItemDao {
 		this.template.update("DELETE FROM linux where page_no = ?", itemId);
 	}
 	
-	private static final String UPDATE = "UPDATE linux SET title = ?, contents = ?, author = ? WHERE page_no = ?";
+	private static final String UPDATE = "UPDATE linux SET title = ?, contents = ?, author = ?, picture = ? WHERE page_no = ?";
 
 	public void udpate(final Item item) {
 		this.jdbcTemplate.execute(UPDATE, new AbstractLobCreatingPreparedStatementCallback(lobHandler) {
@@ -95,11 +97,15 @@ public class ItemDaoImpl implements ItemDao {
 				ps.setString(++index, item.getTitle());
 				ps.setString(++index, item.getContents());
 				ps.setString(++index, item.getAuthor());
-				/*try {
-					lobCreator.setBlobAsBytes(ps, ++index, item.getPicture().getBytes());
+				try {
+					if(null!= item.getPicture().getBytes()){
+						lobCreator.setBlobAsBytes(ps, ++index, item.getPicture().getBytes());
+					}else{
+						ps.setBlob(++index, (Blob) item.getPicture());
+					}
 				} catch (IOException e) {
 					throw new RuntimeException(e);
-				}*/
+				}
 				ps.setInt(++index, item.getPageNo().intValue());
 			}
 		});

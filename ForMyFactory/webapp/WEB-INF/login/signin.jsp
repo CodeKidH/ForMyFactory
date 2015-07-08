@@ -25,17 +25,17 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
           <h1 class="text-center">Login</h1>
       </div>
-      <div class="modal-body">
+      <!-- <div class="modal-body"> -->
       	<c:if test="${not empty param.log_error}">
       		<font color="red">${SPRING_SECURITY_LAST_EXCEPTION.message}</font>
       	</c:if>
       		<c:url value="/j_spring_security_check" var="loginUrl" />
           <form action="${loginUrl}" method="post" class="form col-md-12 center-block">
             <div class="form-group">
-              <input type="text" class="form-control input-lg" name="j_username" >
+              <input type="text" class="form-control input-lg" name="j_username" placeholder="enter your id">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control input-lg" name="j_password">
+              <input type="password" class="form-control input-lg" name="j_password" placeholder="enter your pw">
             </div>
             <div class="form-group">
               <input type="submit" value="Sign In" class="btn btn-primary btn-lg btn-block"/>
@@ -43,7 +43,7 @@
             </div>
           </form>
           
-      </div>
+   <!--    </div> -->
       <div class="modal-footer">
           <div class="col-md-12">
           <button class="btn" data-dismiss="modal" aria-hidden="true"><a href="javascript:history.back()">Cancel</a></button>
