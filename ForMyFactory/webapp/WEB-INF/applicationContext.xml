@@ -11,14 +11,14 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
-
+	
 	<!-- Transaction -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource">
 	</bean>
 	<tx:annotation-driven />
-
+	
 	<!-- Data Source -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -27,20 +27,20 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<!-- JDBC 접속문자열 설정  -->
-		<property name="url"> <!--  jeongh389 -->
+		<property name="url"> <!--  jeongh389,web -->
 			<value>jdbc:mysql://localhost/web?useUnicode=true&amp;characterEncoding=utf8
 			</value>
 		</property>
-		<!-- MySQL 유저ID 설정 root -->
+		<!-- MySQL 유저ID 설정 root jeongh389-->
 		<property name="username">
 			<value>root</value>
 		</property>
-		<!-- MySQL 패스워드 설정 1111-->
+		<!-- MySQL 패스워드 설정 1111,jhP@ssw0rd-->
 		<property name="password">
 			<value>1111</value>
 		</property>
 	</bean>
-
+	
 	<!-- MessageSource -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
