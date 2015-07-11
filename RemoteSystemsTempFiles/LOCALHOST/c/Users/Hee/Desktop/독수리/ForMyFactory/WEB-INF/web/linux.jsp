@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-
+<title>DevHee</title>
     
 </head>
 
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
+				
                
                 <div class="container-fluid">
                     <div class="jumbotron">

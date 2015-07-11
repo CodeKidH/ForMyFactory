@@ -67,7 +67,7 @@
             <a href="#services" class="btn btn-dark btn-lg" >Find Out More</a>
         </div>
     </header>
-
+	
     <!-- About -->
     <!-- <section id="about" class="about">
         <div class="container">
@@ -81,7 +81,7 @@
         </div>
         /.container
     </section> -->
-
+	
     <!-- Services -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
     <section id="services" class="services bg-primary">
@@ -140,7 +140,7 @@
                                     <strong>To do</strong>
                                 </h4>
                                 <p>This is to do list</p>
-                                <a href="sorry.html" class="btn btn-light">Learn More</a>
+                                <a href="todo.html" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                     </div>
