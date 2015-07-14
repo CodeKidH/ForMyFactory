@@ -11,14 +11,14 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
-
+	
 	<!-- Transaction -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
 		p:dataSource-ref="dataSource">
 	</bean>
 	<tx:annotation-driven />
-
+	
 	<!-- Data Source -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -35,12 +35,12 @@
 		<property name="username">
 			<value>jeongh389</value>
 		</property>
-		<!-- MySQL 패스워드 설정 1111-->
+		<!-- MySQL 패스워드 설정 1111,jhP@ssw0rd-->
 		<property name="password">
 			<value>jhP@ssw0rd</value>
 		</property>
 	</bean>
-
+	
 	<!-- MessageSource -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
