@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -47,7 +51,6 @@
   <div class="row">
     
     <div class="col-md-8">
-       <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>To Do</strong></a>  
       <hr>
    		
         <ul class="nav nav-justified">
@@ -56,22 +59,24 @@
 		</ul>   
 		<div id="add" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
-		
+			<form:form modelAttribute="todo" action="registerToDo.html">
 		    <!-- add-->
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
 		        <h4 class="modal-title">What to do</h4>
 		      </div>
-		      <div class="modal-body">
-		        <input type="text" class="form-control input-lg" name="j_username" placeholder="Enter your Goal">
+		       <div class="form-group">
+			      <div class="modal-body">
+			        <form:input path="note" class="form-control input-lg" name="j_username" placeholder="Enter your Goal"/>
+			      </div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        <button type="submit" class="btn btn-default" >Submit</button>
 		      </div>
 		    </div>
-		
+			</form:form>
 		  </div>
 		</div>
 		
@@ -95,12 +100,15 @@
 		
 		  </div>
 		</div>
+	  
       <hr>
+      	  <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>To Do</strong></a>
        <table class="table table-striped">
         <thead>
           <tr><th></th><th>Num</th><th>Date</th><th>Rate</th><th>Description and Notes</th></tr>
         </thead>
         <tbody>
+        <%--   <c:forEach items="${todoList}" var="todo"> --%>
           <tr>
        		<td>
        			<input type="checkbox" value="">
@@ -108,28 +116,30 @@
           	<td>
           	</td>
           	<td>
-          		2.45%
           	</td>
 	      	<td>
 				<div class="progress">
-                 	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"> </div>
+                 	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 0%"> </div>
                 </div>
+            </td>
             <td>
-           </td>
+           		 ${todo.note}
+            </td>
          </tr>
+      <%--    </c:forEach> --%>
         </tbody>
       </table>
       
           
     </div>
      <div class="col-md-4">
-    	  <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>Done</strong></a> 
       <hr>
       <ul class="nav nav-justified">
 			<li><a href="#"  data-toggle="modal" data-target="#delete2"><i class="glyphicon glyphicon-cog"></i></a></li>
 		</ul>  
+		
       <hr>    
-      
+       <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>Done</strong></a> 
        <table class="table table-striped">
         <thead>
           <tr><th></th><th>Num</th><th>Description and Notes</th></tr>
@@ -142,9 +152,7 @@
           	<td>
           	</td>
 	      	<td>
-				<div class="progress">
-                 	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%"> </div>
-                </div>
+	      		<strong>Success</strong>
             <td>
            </td>
          </tr>
@@ -154,7 +162,7 @@
     
     <div id="delete2" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
-		
+			
 		    <!--delete-->
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -169,7 +177,7 @@
 		        <button type="submit" class="btn btn-default" >Submit</button>
 		      </div>
 		    </div>
-		
+			
 		  </div>
 		</div>
     	

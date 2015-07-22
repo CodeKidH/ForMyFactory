@@ -28,16 +28,16 @@
 		</property>
 		<!-- JDBC 접속문자열 설정  -->
 		<property name="url"> <!--  jeongh389,web -->
-			<value>jdbc:mysql://localhost/jeongh389?useUnicode=true&amp;characterEncoding=utf8
+			<value>jdbc:mysql://localhost/web?useUnicode=true&amp;characterEncoding=utf8
 			</value>
 		</property>
 		<!-- MySQL 유저ID 설정 root jeongh389-->
 		<property name="username">
-			<value>jeongh389</value>
+			<value>root</value>
 		</property>
 		<!-- MySQL 패스워드 설정 1111,jhP@ssw0rd-->
 		<property name="password">
-			<value>jhP@ssw0rd</value>
+			<value>1111</value>
 		</property>
 	</bean>
 	

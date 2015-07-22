@@ -46,7 +46,7 @@ public class ItemDaoImpl implements ItemDao {
 		RowMapper<Item> mapper = new BeanPropertyRowMapper<Item>(Item.class);
 		return this.template.query(ItemDaoImpl.SELECT_ALL, mapper);
 	}
-
+	
 	private static final String SELECT_BY_PRIMARY_KEY = "SELECT page_no, title, author,contents, today FROM linux WHERE page_no = ?";
 
 	public Item findByPrimaryKey(Integer itemId) {

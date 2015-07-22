@@ -49,10 +49,9 @@
     <div class="col-md-8">
        <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>To Do</strong></a>  
       <hr>
-   
+   		
         <ul class="nav nav-justified">
  			<li><a href="#" data-toggle="modal" data-target="#delete"><i class="glyphicon glyphicon-cog"></i></a></li>
- 			<!-- <li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li> -->
  			<li><a title="Add Widget" data-toggle="modal" href="#addWidgetModal" data-target="#add"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
 		</ul>   
 		<div id="add" class="modal fade" role="dialog">
@@ -96,26 +95,17 @@
 		
 		  </div>
 		</div>
-      <hr>    
-    </div>
-     <div class="col-md-4">
-    	  <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>Done</strong></a> 
       <hr>
-      <ul class="nav nav-justified">
-         			<li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
-       			</ul>  
-      <hr>    
-    </div>
-    <div class="col-md-8">
-      
-      <table class="table table-striped">
+       <table class="table table-striped">
         <thead>
-          <tr><th>Goal</th><th>Date</th><th>Rate</th><th>Description and Notes</th></tr>
+          <tr><th></th><th>Num</th><th>Date</th><th>Rate</th><th>Description and Notes</th></tr>
         </thead>
         <tbody>
           <tr>
+       		<td>
+       			<input type="checkbox" value="">
+          	</td>
           	<td>
-          		<label></label><input type="checkbox" value="">Goal</label>
           	</td>
           	<td>
           		2.45%
@@ -130,17 +120,26 @@
         </tbody>
       </table>
       
-      
+          
     </div>
-    <div class="col-md-4">
-     <table class="table table-striped">
+     <div class="col-md-4">
+    	  <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>Done</strong></a> 
+      <hr>
+      <ul class="nav nav-justified">
+			<li><a href="#"  data-toggle="modal" data-target="#delete2"><i class="glyphicon glyphicon-cog"></i></a></li>
+		</ul>  
+      <hr>    
+      
+       <table class="table table-striped">
         <thead>
-          <tr><th>Goal</th><th>Description and Notes</th></tr>
+          <tr><th></th><th>Num</th><th>Description and Notes</th></tr>
         </thead>
         <tbody>
          <tr>
           	<td>
-          		<label></label><input type="checkbox" value="">Goal</label>
+          		<input type="checkbox" value="">
+          	</td>
+          	<td>
           	</td>
 	      	<td>
 				<div class="progress">
@@ -151,11 +150,31 @@
          </tr>
         </tbody>
       </table>
-      
-              
-      
-    </div><!--/col-->
+    </div>
     
+    <div id="delete2" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!--delete-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Delete</h4>
+		      </div>
+		      <div class="modal-body">
+		       <p>Congraturation!!</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="submit" class="btn btn-default" >Submit</button>
+		      </div>
+		    </div>
+		
+		  </div>
+		</div>
+    	
+   
+    	
   </div><!--/row-->
   
 </div><!--/container-->
