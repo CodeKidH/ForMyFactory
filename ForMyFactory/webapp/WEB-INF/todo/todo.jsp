@@ -82,7 +82,7 @@
 		
 		<div id="delete" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
-		
+			
 		    <!--delete-->
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -94,39 +94,43 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="submit" class="btn btn-default" >Submit</button>
+		        <button type="button" class="btn btn-default" onclick="javascript:deleteTodo()">Delete</button>
 		      </div>
 		    </div>
-		
+			
 		  </div>
 		</div>
-	  
       <hr>
       	  <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>To Do</strong></a>
        <table class="table table-striped">
         <thead>
           <tr><th></th><th>Num</th><th>Date</th><th>Rate</th><th>Description and Notes</th></tr>
         </thead>
+        <c:set var="i" value=""/>
         <tbody>
-        <%--   <c:forEach items="${todoList}" var="todo"> --%>
+          <c:forEach items="${todoList}" var="todo">
+          <c:set var="i" value="${i+1}"/>
           <tr>
        		<td>
-       			<input type="checkbox" value="">
+       			<input type="checkbox" value="${todo.num}" id="todolist_${i}">
+          	</td>
+          	<td id="num">
+          		${todo.num}
           	</td>
           	<td>
-          	</td>
-          	<td>
+          		${todo.todate}
           	</td>
 	      	<td>
 				<div class="progress">
-                 	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 0%"> </div>
+                 	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: ${todo.rate}%"> </div>
                 </div>
             </td>
             <td>
            		 ${todo.note}
             </td>
          </tr>
-      <%--    </c:forEach> --%>
+      
+         </c:forEach>
         </tbody>
       </table>
       
@@ -181,7 +185,7 @@
 		  </div>
 		</div>
     	
-   
+   <input type = "hidden" id = "size" value = "${todoListSize}"/>	
     	
   </div><!--/row-->
   
@@ -189,15 +193,19 @@
 <!-- /Main -->
 	<!-- script references -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script>
+		function deleteTodo(){
+		var size = JQuery("#size").val();
+		
+		for(var i = 1; i<size; i++){
+			if(JQuery("#todolist_"+i).is(":checked") == true){
+				
+			}
+		}
+	
+	}
+		</script>
 		<script src="js/bootstrap.min.js"></script>
 	</body>
-<script type="text/javascript">
-	function openAdd(){
-		var o =  {}
-		var goal = prompt(o,pop);
-		function pop(){}
-		alert('hell');
-	}
-	
-</script>
+
 </html>

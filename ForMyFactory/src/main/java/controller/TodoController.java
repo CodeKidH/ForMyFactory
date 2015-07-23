@@ -31,9 +31,11 @@ public class TodoController {
 		
 		Map<String, Object>model = new HashMap<String,Object>();
 		model.put("todoList", todoList);
+		model.put("todoListSize",todoList.size());
 		
 		ModelAndView modelAndView = new ModelAndView("/todo/todo");
 		modelAndView.addObject(new Todo());
+		modelAndView.addAllObjects(model);
 		return modelAndView;
 	}
 	
@@ -48,4 +50,6 @@ public class TodoController {
 		this.todoService.entryTodo(todo);
 		return this.todo();
 	}
+	
+	
 }
