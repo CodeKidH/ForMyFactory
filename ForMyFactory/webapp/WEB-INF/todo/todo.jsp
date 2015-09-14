@@ -50,12 +50,13 @@
   <!-- lower section -->
   <div class="row">
     
-    <div class="col-md-8">
+    <div class="col-md-12">
       <hr>
    		
         <ul class="nav nav-justified">
- 			<li><a href="#" data-toggle="modal" data-target="#delete"><i class="glyphicon glyphicon-cog"></i></a></li>
+ 			<li><a href="#" data-toggle="modal" data-target="#rating"><i class="glyphicon glyphicon-cog"></i></a></li>
  			<li><a title="Add Widget" data-toggle="modal" href="#addWidgetModal" data-target="#add"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
+ 			<li><a title="Add Widget" data-toggle="modal" href="#addWidgetModal" data-target="#delete"><span class="glyphicon glyphicon-minus-sign"></span></a></li>
 		</ul>   
 		<div id="add" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
@@ -80,36 +81,63 @@
 		  </div>
 		</div>
 		
-		<div id="delete" class="modal fade" role="dialog">
+		<div id="rating" class="modal fade" role="dialog">
 		  <div class="modal-dialog">
-			
 		    <!--delete-->
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">Delete</h4>
+		        <h4 class="modal-title">Option</h4>
 		      </div>
 		      <div class="modal-body">
-		       <p> Are you sure selected data is deleted?</p>
+		       <button type="button" class="col-xs-4 btn btn-default btn-md" onclick="rateTodo()" value="rate">Rate</button>
+		       
+		        <div class="col-xs-8 selectContainer">
+		            <select id="rate" class="form-control" name="size">
+		                <option value="">Choose a Rate</option>
+		                <option value="20">SoSo(20)</option>
+		                <option value="40">Good(40)</option>
+		                <option value="60">Excellent(60)</option>
+		                <option value="80">Almost There!(80)</option>
+		                <option value="100">Success(100)</option>
+		            </select>
+		      </div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-default" onclick="javascript:deleteTodo()">Delete</button>
 		      </div>
 		    </div>
-			
+		  </div>
+		</div>
+		
+		<div id="delete" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		    <!--delete-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Option</h4>
+		      </div>
+		      <div class="modal-body">
+			      <div class="row">
+			       <button type="button" class="btn btn-default btn-md" onclick="deleteTodo()">Delete</button> : Are you sure to delete it?
+			      </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
 		  </div>
 		</div>
       <hr>
       	  <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>To Do</strong></a>
        <table class="table table-striped">
         <thead>
-          <tr><th></th><th>Num</th><th>Date</th><th>Rate</th><th>Description and Notes</th></tr>
+          <tr><th></th><th>Num</th><th>Date</th><th>Rate</th><th>Description and Notes</th><th>Success</th></tr>
         </thead>
-        <c:set var="i" value=""/>
+        <c:set var="i" value="0"/>
         <tbody>
           <c:forEach items="${todoList}" var="todo">
-          <c:set var="i" value="${i+1}"/>
           <tr>
        		<td>
        			<input type="checkbox" value="${todo.num}" id="todolist_${i}">
@@ -120,92 +148,86 @@
           	<td>
           		${todo.todate}
           	</td>
-	      	<td>
-				<div class="progress">
-                 	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: ${todo.rate}%"> </div>
-                </div>
-            </td>
+	      	<td class="progress">
+                 	<div class="progress-bar <c:choose> <c:when test="${todo.rate == 100}">progress-bar-success</c:when>
+                 										<c:when test="${todo.rate == 80}">progress-bar-danger</c:when>
+                 										<c:when test="${todo.rate == 60}">progress-bar-danger</c:when>
+                 										<c:when test="${todo.rate == 40}">progress-bar-info</c:when>
+                 										<c:when test="${todo.rate == 20}">progress-bar-info</c:when>
+                 	</c:choose>" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: ${todo.rate}%"> </div>
+                 	<input type="hidden" value="${todo.rate}" id="rate_${i}"/>
             <td>
            		 ${todo.note}
             </td>
+             <td>
+             	<c:if test="${todo.rate == 100}">
+             		<strong style="color:#FFCD28">Success</strong>
+             	</c:if>
+            </td>
          </tr>
-      
+      	 <c:set var="i" value="${i+1}"/>
          </c:forEach>
         </tbody>
       </table>
       
           
     </div>
-     <div class="col-md-4">
-      <hr>
-      <ul class="nav nav-justified">
-			<li><a href="#"  data-toggle="modal" data-target="#delete2"><i class="glyphicon glyphicon-cog"></i></a></li>
-		</ul>  
-		
-      <hr>    
-       <a href="#"><strong><i class="glyphicon glyphicon-list-alt"></i>Done</strong></a> 
-       <table class="table table-striped">
-        <thead>
-          <tr><th></th><th>Num</th><th>Description and Notes</th></tr>
-        </thead>
-        <tbody>
-         <tr>
-          	<td>
-          		<input type="checkbox" value="">
-          	</td>
-          	<td>
-          	</td>
-	      	<td>
-	      		<strong>Success</strong>
-            <td>
-           </td>
-         </tr>
-        </tbody>
-      </table>
-    </div>
     
-    <div id="delete2" class="modal fade" role="dialog">
-		  <div class="modal-dialog">
-			
-		    <!--delete-->
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">Delete</h4>
-		      </div>
-		      <div class="modal-body">
-		       <p>Congraturation!!</p>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="submit" class="btn btn-default" >Submit</button>
-		      </div>
-		    </div>
-			
-		  </div>
-		</div>
-    	
+    
    <input type = "hidden" id = "size" value = "${todoListSize}"/>	
     	
   </div><!--/row-->
   
 </div><!--/container-->
-<!-- /Main -->
-	<!-- script references -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script>
-		function deleteTodo(){
-		var size = JQuery("#size").val();
-		
-		for(var i = 1; i<size; i++){
-			if(JQuery("#todolist_"+i).is(":checked") == true){
-				
-			}
-		}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+<script>
+function deleteTodo(){
+	var size = jQuery("#size").val();
+	var todoArray = new Array();
+	var todoObject = new Object();
+	var count = 0;
 	
+	
+	for(var i = 0; i<size; i++){
+		
+		if(jQuery("#todolist_"+i).is(":checked") == true){
+			todoArray[count] = jQuery("#todolist_"+i).val();
+			count++;
+		}
 	}
-		</script>
-		<script src="js/bootstrap.min.js"></script>
-	</body>
+	
+	if(todoArray == ""){
+		alert("Choose a delete row");
+	}else{
+		location.href = "deleteTodo.html?param="+todoArray;
+	}
+
+}
+
+function rateTodo(){
+	
+	var size = jQuery("#size").val();
+	var rate = jQuery("#rate").val();
+	var todoArray = new Array();
+	var count = 0;
+	
+	for(var i = 0; i<size; i++){
+			
+		if(jQuery("#todolist_"+i).is(":checked") == true){
+			todoArray[count] = jQuery("#todolist_"+i).val();
+			count++;
+		}
+	}
+	
+	if(todoArray == ""){
+		alert("Choose a rate row");
+	}else{
+		location.href = "rateTodo.html?param="+todoArray+"&rate="+rate;
+	}
+}
+
+</script>
+<script src="js/bootstrap.min.js"></script>
+</body>
 
 </html>

@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -42,13 +44,45 @@ public class TodoController {
 	
 	@RequestMapping(value="/registerToDo", method=RequestMethod.POST)
 	public ModelAndView registerToDo(@Valid Todo todo,BindingResult bindingResult) throws SQLException{
+		
 		if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("/todo/todo");
 			modelAndView.getModel().putAll(bindingResult.getModel());
 			return modelAndView;
 		}
+		
 		this.todoService.entryTodo(todo);
 		return this.todo();
+	}
+	
+	@RequestMapping(value="/deleteTodo",method=RequestMethod.GET)
+	public ModelAndView deleteTodo( @RequestParam (value ="param")int param){
+		
+	/*	if (bindingResult.hasErrors()) {
+			ModelAndView modelAndView = new ModelAndView("/todo/todo");
+			modelAndView.getModel().putAll(bindingResult.getModel());
+			return modelAndView;
+		}*/
+		
+		this.todoService.deleteTodo(param);
+		return this.todo();
+	}
+	
+	@RequestMapping(value="/rateTodo",method=RequestMethod.GET)
+	public ModelAndView updateRate(@Valid Todo todo,BindingResult bindingResult
+			,@RequestParam(value="param")int param
+			,@RequestParam(value="rate")int rate){
+			
+		if (bindingResult.hasErrors()) {
+			ModelAndView modelAndView = new ModelAndView("/todo/todo");
+			modelAndView.getModel().putAll(bindingResult.getModel());
+			return modelAndView;
+		}
+		
+		this.todoService.rateTodo(param, rate);
+		return this.todo();
+		
+		
 	}
 	
 	

@@ -84,6 +84,7 @@ public class ItemDaoImpl implements ItemDao {
 	
 	public void delete(Integer itemId) {
 		this.template.update("DELETE FROM linux where page_no = ?", itemId);
+		sqlBatch(batch);
 	}
 	
 	private static final String UPDATE = "UPDATE linux SET title = ?, contents = ?, author = ?, picture = ? WHERE page_no = ?";
@@ -109,6 +110,12 @@ public class ItemDaoImpl implements ItemDao {
 				ps.setInt(++index, item.getPageNo().intValue());
 			}
 		});
+	}
+	
+	private static final String batch [] = {"ALTER TABLE linux AUTO_INCREMENT = 1","SET @COUNT = 0","UPDATE linux SET linux.page_no = @COUNT:=@COUNT+1"};
+	
+	public void sqlBatch(final String[] sql){
+		jdbcTemplate.batchUpdate(sql);
 	}
 	
 	public InputStream getPicture(Integer itemId) {

@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,14 @@ public class TodoServiceImpl implements TodoService{
 	
 	public void entryTodo(Todo todo){
 		this.tododao.create(todo);
+	}
+	
+	public void deleteTodo(int list){
+		this.tododao.delete(list);
+	}
+	
+	public void rateTodo(int list,int rate){
+		this.tododao.rateUpdate(list,rate);
 	}
 	
 }
