@@ -172,7 +172,14 @@
       
           
     </div>
-    
+   <form id="tran" name="tran" method="post" action="deleteTodo.html">
+    	<input type = "hidden" name="paramMap" id = todoArray value = ""/>
+   </form>
+   
+   <form id="tran1" name="tran1" method="post" action="rateTodo.html">
+    	<input type = "hidden" name="paramMap" id = todoArray1 value = ""/>
+    	<input type = "hidden" name="rate" id = rate value = ""/>
+   </form>
     
    <input type = "hidden" id = "size" value = "${todoListSize}"/>	
     	
@@ -183,7 +190,7 @@
 <script>
 function deleteTodo(){
 	var size = jQuery("#size").val();
-	var todoArray = new Array();
+	var todoArray="";
 	var todoObject = new Object();
 	var count = 0;
 	
@@ -191,15 +198,18 @@ function deleteTodo(){
 	for(var i = 0; i<size; i++){
 		
 		if(jQuery("#todolist_"+i).is(":checked") == true){
-			todoArray[count] = jQuery("#todolist_"+i).val();
+			todoArray = jQuery("#todolist_"+i).val()+"-"+todoArray;
 			count++;
 		}
 	}
 	
+	jQuery("#todoArray").val(todoArray);
+	
 	if(todoArray == ""){
 		alert("Choose a delete row");
 	}else{
-		location.href = "deleteTodo.html?param="+todoArray;
+		jQuery("#tran").submit();
+		//location.href = "deleteTodo.html?param="+todoArray;
 	}
 
 }
@@ -208,21 +218,24 @@ function rateTodo(){
 	
 	var size = jQuery("#size").val();
 	var rate = jQuery("#rate").val();
-	var todoArray = new Array();
+	var todoArray = "";
 	var count = 0;
 	
 	for(var i = 0; i<size; i++){
 			
 		if(jQuery("#todolist_"+i).is(":checked") == true){
-			todoArray[count] = jQuery("#todolist_"+i).val();
+			todoArray = jQuery("#todolist_"+i).val()+"-"+todoArray;
 			count++;
 		}
 	}
+	jQuery("#todoArray1").val(todoArray);
+	jQuery("#rate").val(rate);
 	
 	if(todoArray == ""){
 		alert("Choose a rate row");
 	}else{
-		location.href = "rateTodo.html?param="+todoArray+"&rate="+rate;
+		
+		location.href = "rateTodo.html?todoArray="+todoArray+"&rate="+rate;
 	}
 }
 

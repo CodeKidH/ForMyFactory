@@ -55,31 +55,47 @@ public class TodoController {
 		return this.todo();
 	}
 	
-	@RequestMapping(value="/deleteTodo",method=RequestMethod.GET)
-	public ModelAndView deleteTodo( @RequestParam (value ="param")int param){
+	@RequestMapping(value="/deleteTodo",method=RequestMethod.POST)
+	public ModelAndView deleteTodo( @RequestParam(value="paramMap")String paramMap){
 		
 	/*	if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("/todo/todo");
 			modelAndView.getModel().putAll(bindingResult.getModel());
 			return modelAndView;
 		}*/
+		//String aa="1-2-3";
+		String[] param = paramMap.split("-");
 		
-		this.todoService.deleteTodo(param);
+		for(int i = 0; i< param.length; i++){
+			
+			int a = Integer.parseInt(param[i]);
+			this.todoService.deleteTodo(a);
+		}
 		return this.todo();
 	}
 	
 	@RequestMapping(value="/rateTodo",method=RequestMethod.GET)
-	public ModelAndView updateRate(@Valid Todo todo,BindingResult bindingResult
-			,@RequestParam(value="param")int param
+	public ModelAndView updateRate(
+			@RequestParam(value="todoArray")String todoArray
 			,@RequestParam(value="rate")int rate){
 			
-		if (bindingResult.hasErrors()) {
+		/*if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("/todo/todo");
 			modelAndView.getModel().putAll(bindingResult.getModel());
 			return modelAndView;
+		}*/
+		
+		
+		String[] param = todoArray.split("-");
+		
+		for(int i = 0; i< param.length; i++){
+			
+			int a = Integer.parseInt(param[i]);
+			this.todoService.rateTodo(a, rate);
 		}
 		
-		this.todoService.rateTodo(param, rate);
+		//this.todoService.rateTodo(param, rate);
+		
 		return this.todo();
 		
 		
